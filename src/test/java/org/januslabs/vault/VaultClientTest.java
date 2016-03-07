@@ -42,8 +42,8 @@ public class VaultClientTest {
  @Test
   public void testVaultClient()
   {
+ 
     Assert.notNull(vaultclient);
-   
   }
   @Test
   /*

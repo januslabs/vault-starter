@@ -8,16 +8,16 @@ public class VaultClient {
 
   @Autowired
   private Vault vaultConfigurer;
-  
+
   @Autowired
   private VaultProperties vaultProperties;
-  
+
   public VaultClient(Vault vaultConfigurer) {
-      this.vaultConfigurer = vaultConfigurer;
+    this.vaultConfigurer = vaultConfigurer;
   }
-  
+
   public String getValue(String path) {
-    path=vaultProperties.getMount()+"/"+path;
+    path = vaultProperties.getMount() + "/" + path;
     return vaultConfigurer.read(path).getData().get("value");
   }
 }

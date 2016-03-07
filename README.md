@@ -13,6 +13,9 @@ You will also need to install [Vault](https://www.vaultproject.io/docs/install/i
 Once installed, you can start a development server using the following command.
 
 	vault server -dev
+    export VAULT_ADDR='http://127.0.0.1:8200'
+    export VAULT_TOKEN=xxxxxxxxxxxxxxxx
+	vault write secret/hello value=world
 	
 For more information refer to the vault website [Vault]( https://www.vaultproject.io/intro/).
 

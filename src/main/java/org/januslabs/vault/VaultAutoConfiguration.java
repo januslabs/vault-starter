@@ -26,11 +26,13 @@ public class VaultAutoConfiguration {
   
   @Bean
   @ConditionalOnProperty(value = "vault.enabled", matchIfMissing = true)
-  @DependsOn()
   public Vault vaultConfigurer(VaultProperties vaultProperties)
   {
-     String vaultToken=System.getenv(vaultProperties.getTokenKey());
-     return new Vault(vaultProperties.getUrl(),vaultToken);
+     if(vaultProperties.getToken().equals(null)|| vaultProperties.getToken().isEmpty())
+     {
+       vaultProperties.setToken(System.getenv(vaultProperties.getTokenKey()));
+     }
+     return new Vault(vaultProperties.getUrl(),vaultProperties.getToken());
   }
   
   @Bean

@@ -17,7 +17,7 @@ public class VaultClient {
   }
   
   public String getValue(String path) {
-    path=vaultProperties.getPrefix()+"/"+vaultProperties.getMount()+"/"+path;
+    path=vaultProperties.getMount()+"/"+path;
     return vaultConfigurer.read(path).getData().get("value");
   }
 }

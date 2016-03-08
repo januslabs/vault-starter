@@ -1,12 +1,14 @@
 package org.januslabs.vault;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.env.Environment;
 
 import lombok.extern.slf4j.Slf4j;
 import se.jhaals.Vault;
@@ -16,6 +18,7 @@ import se.jhaals.Vault;
 @Slf4j
 public class VaultAutoConfiguration {
 
+  private @Autowired Environment environment;
   @Bean
   @ConditionalOnMissingBean
   @ConditionalOnProperty(value = "vault.enabled", matchIfMissing = true)
@@ -27,7 +30,8 @@ public class VaultAutoConfiguration {
   @Bean
   @ConditionalOnProperty(value = "vault.enabled", matchIfMissing = true)
   public Vault vaultConfigurer(VaultProperties vaultProperties) {
-    if (vaultProperties.getToken().equals(null) || vaultProperties.getToken().isEmpty()) {
+    log.info("environment  " + environment);
+    if (vaultProperties.getToken()==null || vaultProperties.getToken().isEmpty()) {
       vaultProperties.setToken(System.getenv(vaultProperties.getTokenKey()));
     }
     return new Vault(vaultProperties.getUrl(), vaultProperties.getToken());

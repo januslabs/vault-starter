@@ -18,7 +18,7 @@ public class VaultClientTest {
   /*
    * Root Token from the dev server
    */
-  public static String VAULT_TOKEN = "38377754-c116-11d1-49a4-2ed6d139c9ee";
+  public static String VAULT_TOKEN = "67f8dd40-3d8c-a18a-c4cc-c6dc58c7993c";
 
   @Rule
   public  final EnvironmentVariables environmentVariables = new EnvironmentVariables();
